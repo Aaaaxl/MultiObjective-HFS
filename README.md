@@ -1,6 +1,6 @@
 # 🌟 MultiObjective-HFS
 
-本仓库收录了《计算智能》课程第7组阅读文献并复现相关算法的全部代码。
+本仓库收录了《计算智能》课程第7组阅读文献复现并改进相关算法的全部代码。
 
 > **原文献**：[《Enhancing classification with hybrid feature selection: A multi-objective genetic algorithm for high-dimensional data》](https://www.sciencedirect.com/science/article/pii/S095741742401385X)  
 > **作者源码**：[sbcblab/MOO-HFS](https://github.com/sbcblab/MOO-HFS)
@@ -12,9 +12,51 @@
 ```
 MOO-HFS/
 │
-├── data/                   # 数据集文件夹，存放原始数据和预处理数据
-│   ├── raw/                # 原始未处理数据
-│   └── processed/          # 预处理后的数据
+├── initial_feature_selection/                   # 特征选择部分
+│   ├── data/                # 存储处理后的数据
+│   │   ├── Arrhythmia/
+│   │   ├── Breast_Cancer/
+│   │   ├── Leukemia/
+│   │   ├── p53_Mutants/
+│   │   └── importances/
+│   │
+│   ├── data_process/          # 处理数据代码部分
+│   │   ├── arrhythmia/
+│   │   │   ├── raw_data_process.ipynb 
+│   │   │   └── arrhythmia_des.md
+│   │   │
+│   │   ├── breast_cancer/
+│   │   │   ├── raw_data_preprocess.ipynb
+│   │   │   ├── merge_data_label.ipynb
+│   │   │   ├── data_check.ipynb
+│   │   │   └── breast_des.md
+│   │   │
+│   │   ├── leukemia/
+│   │   │   ├──
+│   │   │   ├──
+│   │   │   └──
+│   │   │ 
+│   │   ├── p53_mutants/
+│   │   │   ├── raw_data_process.ipynb
+│   │   │   └── p53_des.md
+│   │ 
+│   ├── deterministic/          # 确定性特征选择代码
+│   │   ├── anovafvalue.py
+│   │   ├── kruskalwallis.py
+│   │   ├── lassocv.py
+│   │   ├── mrmr.py
+│   │   └── relieff.py
+│   │
+│   ├── non_deterministic/          # 非确定性特征选择代码
+│   │   ├── decisiontree.py
+│   │   ├── linearsvm.py
+│   │   ├── mutualinfo.py
+│   │   └── randomforest.py
+│   │
+│   ├── feature_selection.ipynb/
+│   ├── config.py
+│   ├── feature_selection.py
+│   └── utils.py
 │
 ├── src/                    # 源代码目录
 │   ├── feature_selection.py # 主要的特征选择算法实现
@@ -65,4 +107,4 @@ MOO-HFS/
 
 ---
 
-> 如有问题或建议，欢迎提 issue 或 PR！
+> 如有问题或建议，欢迎提 issue ！
