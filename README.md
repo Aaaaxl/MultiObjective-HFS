@@ -29,66 +29,52 @@
 ```
 MOO-HFS/
 │
-├── initial_feature_selection/                   # 特征选择部分
-│   ├── data/                # 存储处理后的数据
-│   │   ├── Arrhythmia/
-│   │   ├── Breast_Cancer/
-│   │   ├── Leukemia/
-│   │   ├── p53_Mutants/
-│   │   └── importances/
+├── data_process/            # 处理数据代码部分
+│   ├── arrhythmia/
+│   │   ├── raw_data_process.ipynb 
+│   │   └── arrhythmia_des.md
 │   │
-│   ├── data_process/          # 处理数据代码部分
-│   │   ├── arrhythmia/
-│   │   │   ├── raw_data_process.ipynb 
-│   │   │   └── arrhythmia_des.md
-│   │   │
-│   │   ├── breast_cancer/
-│   │   │   ├── raw_data_preprocess.ipynb
-│   │   │   ├── merge_data_label.ipynb
-│   │   │   ├── data_check.ipynb
-│   │   │   └── breast_des.md
-│   │   │
-│   │   ├── leukemia/
-│   │   │   ├──
-│   │   │   ├──
-│   │   │   └──
+│   ├── breast_cancer/
+│   │   ├── raw_data_preprocess.ipynb
+│   │   ├── merge_data_label.ipynb
+│   │   ├── data_check.ipynb
+│   │   └── breast_des.md
 │   │   │ 
-│   │   ├── p53_mutants/
-│   │   │   ├── raw_data_process.ipynb
-│   │   │   └── p53_des.md
+│   ├── p53_mutants/
+│   │   ├── raw_data_process.ipynb
+│   │   └── p53_des.md
 │   │ 
-│   ├── deterministic/          # 确定性特征选择代码
+│   └── readme.md
+│
+├── feature_selection/            # 特征选择部分
+│   │ 
+│   ├── deterministic/          # 确定性特征选择方法
 │   │   ├── anovafvalue.py
 │   │   ├── kruskalwallis.py
 │   │   ├── lassocv.py
 │   │   ├── mrmr.py
 │   │   └── relieff.py
 │   │
-│   ├── non_deterministic/          # 非确定性特征选择代码
+│   ├── non_deterministic/          # 非确定性特征选择方法
 │   │   ├── decisiontree.py
 │   │   ├── linearsvm.py
 │   │   ├── mutualinfo.py
 │   │   └── randomforest.py
 │   │
-│   ├── feature_selection.ipynb/
-│   ├── config.py
-│   ├── feature_selection.py
-│   └── utils.py
+│   ├── feature_selection.py            # 特征选择主函数
+│   └── utils.py            # 辅助函数
 │
-├── src/                    # 源代码目录
-│   ├── feature_selection.py # 主要的特征选择算法实现
-│   ├── utils.py            # 工具函数，如数据加载、评估指标等
-│   └── main.py             # 项目入口，训练和测试脚本
+├── eval/            # 验证方法目录
+│   ├── eval_baseline.py            # 不使用特征选择方法
+│   ├── eval_reduced.py            # 使用特征选择方法
+│   └── utils.py            # 辅助函数
 │
-├── experiments/            # 实验相关脚本或配置文件
-│   └── experiment1.py      # 某个具体实验脚本
-│
-├── notebooks/              # Jupyter notebooks，实验笔记和可视化
-│
-├── requirements.txt        # 依赖包列表
+├── eval_baseline.ipynb               # Jupyter notebooks，实验笔记和可视化
+├── baseline_process.py               # baseline 实验主函数
+├── config.py               # 路径及参数
+├── utils.py               # 辅助函数
 ├── README.md               # 项目介绍及运行说明
-├── LICENSE                 # 许可证
-└── setup.py                # （可选）安装脚本
+└── LICENSE                 # 许可证
 ```
 
 ---
