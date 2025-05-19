@@ -11,7 +11,7 @@
 
 - [x] Arrhythmia、p53_Mutants、Breast Cancer 数据集预处理
 - [x] 传统方法特征选择、分类（baseline 实验）
-- [x] 多目标遗传算法 (MOGA 实验) 的主要模块实现
+- [ ] 多目标遗传算法 (MOGA 实验) 的主要模块实现
 
 ---
 
