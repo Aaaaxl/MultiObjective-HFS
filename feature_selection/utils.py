@@ -2,6 +2,7 @@ import logging
 import pandas as pd
 import os
 from sklearn.feature_selection import VarianceThreshold
+from sklearn.preprocessing import LabelEncoder
 
 def save_importances(feature_names, importances, method, dst_path, random_state, ascending=False):
     # Save importances to a .csv file following the wTSNE format
@@ -48,9 +49,9 @@ def get_df(data_path, index_col=False):
     return df
 
 
-def df_process(df, label='Class', fit_trans=False):
+def df_process(df, label='Class', fit_trans=True):
     # 特征名
-    feature_names = df.drop(columns=[label]).columns.tolist()
+    ori_feature_names = df.drop(columns=[label]).columns.tolist()
 
     # 去掉含 NaN 的列
 
@@ -62,4 +63,8 @@ def df_process(df, label='Class', fit_trans=False):
         le = LabelEncoder()
         y_e = le.fit_transform(y_e)  # 变成0/1标签
 
+    
+    X_e, mask = select_by_variance(X_e)
+    feature_names = [name for name, keep in zip(ori_feature_names, mask) if keep]
+    
     return X_e, y_e, feature_names

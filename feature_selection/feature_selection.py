@@ -58,10 +58,7 @@ def feature_selection_all(data_path, label, importances_path,
                          'mutualinfo']
 
     df = get_df(data_path)
-    X_e, y_e, ori_feature_names = df_process(df)
-
-    X_e, mask = select_by_variance(X_e)
-    feature_names = [name for name, keep in zip(ori_feature_names, mask) if keep]
+    X_e, y_e, feature_names = df_process(df)
     
     for method in non_deterministic:
         sorted_importances = feature_selection(X_e, y_e, method, 
