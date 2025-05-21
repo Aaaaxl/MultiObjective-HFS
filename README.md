@@ -73,7 +73,22 @@ MOO-HFS/
 │   ├── eval_reduced.py            # 使用特征选择方法
 │   └── utils.py            # 辅助函数
 │
-├── eval_baseline.ipynb               # Jupyter notebooks，实验笔记和可视化
+├── nsgaii/            # nsgaii 方法实现
+│   ├── problem.py            # MOO 问题
+│   ├── sampling.py            # 采样
+│   ├── crossover.py            # 交叉
+│   ├── mutation.py            # 变异
+│   └── utils.py            # 辅助函数
+│ 
+├── experiment/            # MOGA 实验主流程
+│   ├── baseline.py            # baseline 实验及验证
+│   ├── moga.py            # MOGA 实验及验证
+│   ├── nsgaii_iter.py            # 使用 nsgaii 方案
+│   └── utils.py            # 辅助函数
+│ 
+├── eval_baseline.ipynb               # 以 arrhythmia 为例进行 baseline 实验
+├── eval_moga.ipynb               # 以 arrhythmia 为例进行 moga 实验
+├── moga_process.py               # MOGA 实验主函数
 ├── baseline_process.py               # baseline 实验主函数
 ├── config.py               # 路径及参数
 ├── utils.py               # 辅助函数
