@@ -10,9 +10,9 @@
 ## ✅ 当前实现的功能
 
 - [x] Arrhythmia、p53_Mutants、Breast Cancer 数据集预处理
-- [x] 传统方法特征选择、分类（baseline 实验）
-- [ ] 多目标遗传算法 (MOGA 实验) 的主要模块实现
-
+- [x] baseline 实验的实现（传统方法特征选择、分类）
+- [x] 多目标遗传算法 (MOGA) 的主要模块实现
+- [x] MOGA 实验的实现
 ---
 
 ## 🛠️ 已进行的改进
