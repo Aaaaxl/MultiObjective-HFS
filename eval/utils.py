@@ -10,6 +10,12 @@ from sklearn.svm import LinearSVC
 from time import time
 import os
 
+import warnings
+from sklearn.exceptions import ConvergenceWarning
+
+# 屏蔽 SVM 迭代不收敛警告
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
+
 
 def get_df(data_path, index_col=False):
     if index_col == True:
@@ -20,7 +26,7 @@ def get_df(data_path, index_col=False):
     return df
 
 
-def df_process(df, label='Class', fit_trans=False):
+def df_process(df, label='Class', fit_trans=True):
     # 特征名
     feature_names = df.drop(columns=[label]).columns.tolist()
 
@@ -45,7 +51,7 @@ def get_eval_model(random_state):
     return clfs
 
 
-def evaluate_df(X_e, y_e, output_file=None, filename=None, fs_method=None, run_id=None, mode="loo", k=5, clfs=None, random_state=42):                
+def evaluate_df(X_e, y_e, output_file=None, filename=None, fs_method=None, mode="loo", k=5, clfs=None, random_state=42):                
     if clfs is None:
         clfs = get_eval_model(random_state)
 
@@ -86,9 +92,8 @@ def evaluate_df(X_e, y_e, output_file=None, filename=None, fs_method=None, run_i
         scores["model"] = name
         # scores["dataset"] = results_dir.split("/")[-1]
         # scores["experiment_id"] = experiment_id
-        scores["run_id"] = run_id
-        # scores["file"] = filename
-        # scores["fs_method"] = fs_method
+        scores["file"] = filename
+        scores["fs_method"] = fs_method
         scores["random_state"] = random_state
         cv_scores.append(pd.DataFrame.from_dict(scores))
 
