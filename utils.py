@@ -6,6 +6,26 @@ import random
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_selection import VarianceThreshold
 
+import yaml
+from argparse import Namespace
+
+
+def load_config(path: str = "config.yaml") -> Namespace:
+    
+    with open(path, "r", encoding="utf-8") as f:
+        cfg = yaml.safe_load(f)
+
+    # 类型转换
+    for key in ("min_features", "max_features", "cv_k", "n_max", "n_gen", "pop_size"):
+        if key in cfg:
+            cfg[key] = int(cfg[key])
+
+    for key in ("fs_prob"):
+        if key in cfg:
+            cfg[key] = float(cfg[key])
+
+    return Namespace(**cfg)
+
 
 # 简单的输出分隔符
 def print_separator(text, sep="=", total_len=50):
@@ -34,23 +54,6 @@ def set_logger():
     logger.setLevel(logging.INFO)
 
 
-# 去除方差为 0 的特征列
-def select_by_variance(X_e):
-    selector = VarianceThreshold()
-    selector_f = selector.fit(X_e)
-    X_e_transformed = selector_f.transform(X_e)
-    X_e_transformed_feature_names = selector_f.get_support()
-
-    logging.info(f"Original data shape: {X_e.shape}")
-    logging.info(f"Selected data shape: {X_e_transformed.shape}")
-    diff = X_e.shape[1] - X_e_transformed.shape[1]
-    logging.info(
-        f"Diff: {diff} features, Excluded proportion: {diff/X_e.shape[1]}, Resulting proportion: {1 - diff/X_e.shape[1]}"
-    )
-
-    return X_e_transformed, X_e_transformed_feature_names
-
-
 # 得到 dataframe 格式的数据
 def get_df(data_path, index_col=False):
     if index_col == True:
@@ -64,7 +67,7 @@ def get_df(data_path, index_col=False):
 # 从 df 中提取 X_e, y_e, feature_names
 def df_process(df, label='Class', fit_trans=True):
     # 特征名
-    ori_feature_names = df.drop(columns=[label]).columns.tolist()
+    feature_names = df.drop(columns=[label]).columns.tolist()
 
     # 去掉 X 中的标签列
     X_e = df.drop(columns=[label]).values
@@ -74,8 +77,4 @@ def df_process(df, label='Class', fit_trans=True):
         le = LabelEncoder()
         y_e = le.fit_transform(y_e)  # 变成0/1标签
 
-    
-    X_e, mask = select_by_variance(X_e)
-    feature_names = [name for name, keep in zip(ori_feature_names, mask) if keep]
-    
     return X_e, y_e, feature_names
