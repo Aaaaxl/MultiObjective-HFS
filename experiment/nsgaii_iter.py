@@ -36,6 +36,7 @@ def run_nsgaii_iter(results_data_dir, importances_path,
     }
 
     logging.info(f"Creating problem for {random_state}")
+    
     # Update reference feature_dfs
     ma_problem = MicroarrayProblem(df, y, cv_k, n_max, evaluator_name, evaluator_obj, target_metric)
     ma_problem.feature_dfs = feature_dfs
@@ -51,6 +52,7 @@ def run_nsgaii_iter(results_data_dir, importances_path,
     )
 
     logging.info(f"Minimizing objectives for {random_state}")
+    
     # Optimize the solutions
     res = minimize(ma_problem, algorithm,("n_gen", n_gen),
                    verbose=True, save_history=True, evaluator_name=evaluator_name)

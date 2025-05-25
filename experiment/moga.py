@@ -4,12 +4,10 @@ import numpy as np
 import pandas as pd
 
 from utils import *
-from feature_selection.utils import get_df, df_process
 from eval.eval_reduced import get_selected_feature_dfs
 from .nsgaii_iter import run_nsgaii_iter
 from .utils import eval_fronts_feature_sets
 from .utils import get_target_from_front_evals
-
 
 
 def run_moga_optimization(data_path, importances_path, results_data_dir,
@@ -64,8 +62,15 @@ def eval_moga_features(data_path, results_data_dir, target_metric, cv_k, clfs, f
             new_front_dfs.append(front_df)
 
     # 汇总结果
+    # 如果没有任何 DataFrame，先给个提示再返回空 df
+    if not new_front_dfs:
+        logging.warning(
+            f"No front_dfs to concatenate. "
+            f"front_paths={front_paths}, feature_set_paths={feature_set_paths}"
+        )
+        return pd.DataFrame()
     front_evals_df = pd.concat(new_front_dfs)
-
+    
     # 保存结果
     if not os.path.exists(f"""{results_data_dir}/nsgaii_results/"""):
         os.makedirs(f"""{results_data_dir}/nsgaii_results/""")

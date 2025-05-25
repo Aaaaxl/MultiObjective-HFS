@@ -55,6 +55,7 @@ def evaluate(X_e, y_e, clf, cv_k):
     return scores
 
 
+'''
 def get_file_paths(results_data_dir, experiment_name, random_state):
 
     subdir_iterators = [
@@ -90,8 +91,43 @@ def get_file_paths(results_data_dir, experiment_name, random_state):
     logging.info(f"Recovering all front files: {feature_set_paths}.")
 
     return front_paths, feature_set_paths
+'''
 
+def get_file_paths(results_data_dir, experiment_name, random_state):
+    # 构造 base_path
+    base_path = os.path.join(
+        results_data_dir,
+        str(random_state),
+        "nsgaii_solutions",
+        experiment_name
+    )
+    if not os.path.isdir(base_path):
+        raise FileNotFoundError(f"目录不存在: {base_path}")
 
+    # 遍历所有文件
+    subdir_files = [
+        os.path.join(dirpath, filename)
+        for dirpath, _, filenames in os.walk(base_path)
+        for filename in filenames
+        if filename.lower().endswith(".csv")
+    ]
 
+    # 只匹配文件名以 "front" 开头的
+    logging.info("Looking for files with prefix: front.")
+    front_paths = [
+        p for p in subdir_files
+        if os.path.basename(p).startswith("front")
+    ]
+    logging.info(f"Recovering all front files: {front_paths}.")
+
+    # 只匹配文件名以 "feature_sets" 开头的
+    logging.info("Looking for files with prefix: feature_sets.")
+    feature_set_paths = [
+        p for p in subdir_files
+        if os.path.basename(p).startswith("feature_sets")
+    ]
+    logging.info(f"Recovering all feature_set files: {feature_set_paths}.")
+
+    return front_paths, feature_set_paths
 
 
