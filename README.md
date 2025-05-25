@@ -88,9 +88,7 @@ MOO-HFS/
 │ 
 ├── eval_baseline.ipynb               # 以 arrhythmia 为例进行 baseline 实验
 ├── eval_moga.ipynb               # 以 arrhythmia 为例进行 moga 实验
-├── moga_process.py               # MOGA 实验主函数
-├── baseline_process.py               # baseline 实验主函数
-├── config.py               # 路径及参数
+├── main.py               # 实验主函数
 ├── utils.py               # 辅助函数
 ├── README.md               # 项目介绍及运行说明
 └── LICENSE                 # 许可证
