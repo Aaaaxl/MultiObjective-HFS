@@ -2,7 +2,7 @@ import numpy as np
 from pymoo.core.problem import ElementwiseProblem
 from sklearn.model_selection import StratifiedKFold, cross_validate
 from copy import copy
-
+import logging
 
 # 多目标优化问题定义
 class MicroarrayProblem(ElementwiseProblem):
@@ -34,22 +34,25 @@ class MicroarrayProblem(ElementwiseProblem):
         X_e = self.X_e[:, x]
         y_e = self.y_e
 
+        logging.info("BEGIN TO Cross Validate")
         scores = cross_validate(
             copy(self.fitness_evaluator_obj),
             X_e,
             y_e.ravel(),
             cv=cv,
             scoring=[
-                "f1_micro",
+                # "f1_micro",
                 "f1_macro",
-                "f1_weighted",
-                "recall_micro",
-                "recall_macro",
-                "recall_weighted",
-                "accuracy",
+                # "f1_weighted",
+                # "recall_micro",
+                # "recall_macro",
+                # "recall_weighted",
+                # "accuracy",
             ],
             return_estimator=False,
             n_jobs=-1,
         )
+
+        logging.info("END TO Cross Validate")
 
         out["F"] = [1 - np.mean(scores[self.fitness_target_metric]), X_e.shape[1]]
