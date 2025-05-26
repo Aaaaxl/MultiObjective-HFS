@@ -9,7 +9,6 @@ from .nsgaii_iter import run_nsgaii_iter
 from .utils import eval_fronts_feature_sets
 from .utils import get_target_from_front_evals
 
-
 def run_moga_optimization(data_path, importances_path, results_data_dir,
                           pop_size, n_gen, fs_distrib, n_max,
                           cv_k, prob_multiplier, evaluator_name, evaluator_obj,
@@ -26,7 +25,6 @@ def run_moga_optimization(data_path, importances_path, results_data_dir,
                     pop_size, n_gen, fs_distrib, n_max,
                     cv_k, prob_multiplier, evaluator_name, evaluator_obj,
                     target_metric, experiment_name,  random_state)
-
 
 # 对多目标特征选择算法产生的“帕累托前沿”特征子集，做交叉验证评估
 def eval_moga_features(data_path, results_data_dir, target_metric, cv_k, clfs, front_paths, feature_set_paths):
