@@ -18,9 +18,8 @@ class MicroarrayProblem(ElementwiseProblem):
         fitness_evaluator_obj,
         fitness_target_metric="test_f1_macro",
     ):
-        super().__init__(
-            n_var=len(df.columns.to_numpy()), n_obj=2, n_ieq_constr=0, xl=0, xu=1
-        )
+        super().__init__(n_var=len(df.columns.to_numpy()), n_obj=2, n_ieq_constr=0, xl=0, xu=1)
+        
         self.L = df.columns.to_numpy()
         self.n_max = n_max
         self.df = df
