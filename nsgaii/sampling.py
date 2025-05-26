@@ -6,6 +6,7 @@ from .utils import get_feature_mask_by_rank
 
 
 class MySampling(Sampling):
+    
     def _do(self, problem, n_samples, **kwargs):
         X = np.full((n_samples, problem.n_var), False, dtype=bool)
 
@@ -18,6 +19,7 @@ class MySampling(Sampling):
 
 # 根据多种特征选择方法的分数，生成多样化的“高质量”初始种群
 class FeatureSampling(Sampling):
+    
     def __init__(self, max_attempts=100, prob_multiplier=1.25, min_features=2):
         self.max_attempts = max_attempts
         self.prob_multiplier = prob_multiplier
@@ -61,6 +63,7 @@ class FeatureSampling(Sampling):
 
 # 混入多种方法的随机采样
 class StrictFeatureSampling(Sampling):
+    
     def __init__(self, best_fs_set, min_features=2):
         self.best_fs_set = best_fs_set
         self.min_features = min_features
