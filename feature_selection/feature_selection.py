@@ -63,9 +63,7 @@ def feature_selection_all(data_path, label, importances_path,
     for method in non_deterministic:
         sorted_importances = feature_selection(X_e, y_e, method, 
                                                feature_names, importances_path, random_state)
-    logging.info(f"{data_path}_{random_state}_Non-deterministic 全部搞定")
     
     for method in deterministic:
         sorted_importances = feature_selection(X_e, y_e, method, 
                                                feature_names, importances_path, random_state)
-    logging.info(f"{data_path}_{random_state}_Deterministic 全部搞定")
